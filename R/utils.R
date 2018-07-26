@@ -24,6 +24,7 @@ utils <- function() {
   return(avail)
 }
 #' @describeIn utils Counts days in a month
+#' @export
 NumberOfDays <- function(date) {
   m <- format(date, format = "%m")
   while (format(date, format = "%m") == m) {
@@ -32,6 +33,7 @@ NumberOfDays <- function(date) {
   return(as.integer(format(date - 1, format = "%d")))
 }
 #' @describeIn utils Strips deg-min-sec vectors to 'numeric' char vector.
+#' @export
 StripDegMinSec <- function(x) {
   x <- regmatches(x, gregexpr("[[:digit:]]+", x))
   x <- lapply(x, function(z) paste(z, collapse = ' '))
@@ -51,6 +53,7 @@ StripDegMinSec <- function(x) {
   return(ret)
 }
 #' @describeIn utils Unlists a list of 'Date' objects w/o coercion to numeric.
+#' @export
 UnlistDate <- function(x) {
   y <- .POSIXct(list())
   class(y) <- 'Date'

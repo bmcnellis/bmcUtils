@@ -1,9 +1,10 @@
 Package: bmcUtils
-Title: What the Package Does (one line, title case)
-Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Title: Miscellaneous R Functions
+Version: 0.0.1
+Authors@R: person("Brandon", "McNellis", email = "brandon.mcnellis@gmail.com", role = c("aut", "cre"))
+Description: Various things - check bmcUtils::utils() for a list of functions.
 Depends: R (>= 3.4.4)
-License: What license is it under?
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 6.0.1

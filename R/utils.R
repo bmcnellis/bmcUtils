@@ -10,13 +10,16 @@
 #' values seperated by single spaces. This makes the vector usable by
 #' the `conv_units` function in the `measurements` package >= v. 1.2.0.
 #'
+#' `UnlistDate` will unlist a list of 'Date' objects without coercing them to
+#' numeric.
+#'
 #' @name utils
 #' @export
 #' @examples NumberOfDays(Sys.Date())
 utils <- function() {
   message('Available functions:')
   avail <- c(
-    'NumberOfDays', 'StrpDegMinSec'
+    'NumberOfDays', 'StrpDegMinSec', 'UnlistDate'
   )
   return(avail)
 }
@@ -46,4 +49,11 @@ StripDegMinSec <- function(x) {
     }
   }
   return(ret)
+}
+#' @describeIn utils Unlists a list of 'Date' objects w/o coercion to numeric.
+UnlistDate <- function(x) {
+  y <- .POSIXct(list())
+  class(y) <- 'Date'
+  x <- lapply(x, function(x) y <<- c(y, x))
+  return(y)
 }

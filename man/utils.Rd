@@ -4,6 +4,7 @@
 \alias{utils}
 \alias{NumberOfDays}
 \alias{StripDegMinSec}
+\alias{UnlistDate}
 \title{Internal utility functions.}
 \usage{
 utils()
@@ -11,6 +12,8 @@ utils()
 NumberOfDays(date)
 
 StripDegMinSec(x)
+
+UnlistDate(x)
 }
 \description{
 `NumberOfDays` counts the days in a month. Input is an object of class
@@ -20,12 +23,17 @@ StripDegMinSec(x)
 to a 'numeric' character vector, where each character is three numeric
 values seperated by single spaces. This makes the vector usable by
 the `conv_units` function in the `measurements` package >= v. 1.2.0.
+
+`UnlistDate` will unlist a list of 'Date' objects without coercing them to
+numeric.
 }
 \section{Functions}{
 \itemize{
 \item \code{NumberOfDays}: Counts days in a month
 
 \item \code{StripDegMinSec}: Strips deg-min-sec vectors to 'numeric' char vector.
+
+\item \code{UnlistDate}: Unlists a list of 'Date' objects w/o coercion to numeric.
 }}
 
 \examples{

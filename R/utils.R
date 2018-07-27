@@ -26,7 +26,8 @@
 utils <- function() {
   message('Available functions:')
   avail <- c(
-    'NumberOfDays', 'StrpDegMinSec', 'UnlistDate', 'clear'
+    'NumberOfDays', 'StrpDegMinSec', 'UnlistDate',
+    'PullFilenameDates', 'clear'
   )
   return(avail)
 }

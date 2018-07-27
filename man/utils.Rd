@@ -5,6 +5,8 @@
 \alias{NumberOfDays}
 \alias{StripDegMinSec}
 \alias{UnlistDate}
+\alias{PullFilenameDates}
+\alias{clear}
 \title{Internal utility functions.}
 \usage{
 utils()
@@ -14,6 +16,10 @@ NumberOfDays(date)
 StripDegMinSec(x)
 
 UnlistDate(x)
+
+PullFilenameDates(fmt)
+
+clear()
 }
 \description{
 `NumberOfDays` counts the days in a month. Input is an object of class
@@ -26,6 +32,13 @@ the `conv_units` function in the `measurements` package >= v. 1.2.0.
 
 `UnlistDate` will unlist a list of 'Date' objects without coercing them to
 numeric.
+
+`PullFilenameDates` extracts dates of the given format from the current
+working directory. Assumes that the format doesn't include alphabetic
+characters.
+
+`clear` is a shortcut function that (1) clears the environment, (2) runs GC,
+(3) clears the console, and (4) restarts R.
 }
 \section{Functions}{
 \itemize{
@@ -34,6 +47,10 @@ numeric.
 \item \code{StripDegMinSec}: Strips deg-min-sec vectors to 'numeric' char vector.
 
 \item \code{UnlistDate}: Unlists a list of 'Date' objects w/o coercion to numeric.
+
+\item \code{PullFilenameDates}: Generates a date vector from filenames.
+
+\item \code{clear}: Clears multiple aspects of the R environment.
 }}
 
 \examples{

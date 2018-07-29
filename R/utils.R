@@ -20,6 +20,8 @@
 #' `clear` is a shortcut function that (1) clears the environment, (2) runs GC,
 #' (3) clears the console, and (4) restarts R.
 #'
+#' `LoopStatus` prints the progress of a slow looop.
+#'
 #' @name utils
 #' @export
 #' @examples NumberOfDays(Sys.Date())
@@ -27,7 +29,7 @@ utils <- function() {
   message('Available functions:')
   avail <- c(
     'NumberOfDays', 'StrpDegMinSec', 'UnlistDate',
-    'PullFilenameDates', 'clear'
+    'PullFilenameDates', 'clear', 'LoopStatus'
   )
   return(avail)
 }
@@ -101,5 +103,11 @@ clear <- function() {
   save.image()
   on.exit(rm(list = ls()))
   on.exit(invisible(.rs.restartR()), add = T)
+  invisible()
+}
+#' @describeIn utils Prints loop progress.
+LoopStatus <- function(from, to, digits = 1) {
+  prog <- round(from / to * 100, digits)
+  cat(prog, '%\n')
   invisible()
 }

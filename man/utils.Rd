@@ -7,6 +7,7 @@
 \alias{UnlistDate}
 \alias{PullFilenameDates}
 \alias{clear}
+\alias{LoopStatus}
 \title{Internal utility functions.}
 \usage{
 utils()
@@ -20,6 +21,8 @@ UnlistDate(x)
 PullFilenameDates(fmt)
 
 clear()
+
+LoopStatus(from, to, digits = 1)
 }
 \description{
 `NumberOfDays` counts the days in a month. Input is an object of class
@@ -39,6 +42,8 @@ characters.
 
 `clear` is a shortcut function that (1) clears the environment, (2) runs GC,
 (3) clears the console, and (4) restarts R.
+
+`LoopStatus` prints the progress of a slow looop.
 }
 \section{Functions}{
 \itemize{
@@ -51,6 +56,8 @@ characters.
 \item \code{PullFilenameDates}: Generates a date vector from filenames.
 
 \item \code{clear}: Clears multiple aspects of the R environment.
+
+\item \code{LoopStatus}: Prints loop progress.
 }}
 
 \examples{

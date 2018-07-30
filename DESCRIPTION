@@ -3,7 +3,7 @@ Title: Miscellaneous R Functions
 Version: 0.0.1
 Authors@R: person("Brandon", "McNellis", email = "brandon.mcnellis@gmail.com", role = c("aut", "cre"))
 Description: Various things - check bmcUtils::utils() for a list of functions.
-Depends: R (>= 3.4.4)
+Depends: R (>= 3.3.3)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

@@ -106,6 +106,7 @@ clear <- function() {
   invisible()
 }
 #' @describeIn utils Prints loop progress.
+#' @export
 LoopStatus <- function(from, to, digits = 1) {
   prog <- round(from / to * 100, digits)
   cat(prog, '%\n')

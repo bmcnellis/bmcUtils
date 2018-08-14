@@ -8,6 +8,7 @@
 \alias{PullFilenameDates}
 \alias{clear}
 \alias{LoopStatus}
+\alias{SnipSingleCharacter}
 \title{Internal utility functions.}
 \usage{
 utils()
@@ -23,6 +24,8 @@ PullFilenameDates(fmt)
 clear()
 
 LoopStatus(from, to, digits = 1)
+
+SnipSingleCharacter(v, side = "front")
 }
 \description{
 `NumberOfDays` counts the days in a month. Input is an object of class
@@ -44,6 +47,8 @@ characters.
 (3) clears the console, and (4) restarts R.
 
 `LoopStatus` prints the progress of a slow looop.
+
+`SnipSingleCharacter` trims a character vector by 1 character for each vector element.
 }
 \section{Functions}{
 \itemize{
@@ -58,6 +63,8 @@ characters.
 \item \code{clear}: Clears multiple aspects of the R environment.
 
 \item \code{LoopStatus}: Prints loop progress.
+
+\item \code{SnipSingleCharacter}: Snips one character from each element of a character vector
 }}
 
 \examples{

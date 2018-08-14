@@ -3,6 +3,7 @@
 export(LoopStatus)
 export(NumberOfDays)
 export(PullFilenameDates)
+export(SnipSingleCharacter)
 export(StripDegMinSec)
 export(UnlistDate)
 export(clear)

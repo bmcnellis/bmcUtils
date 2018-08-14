@@ -22,6 +22,8 @@
 #'
 #' `LoopStatus` prints the progress of a slow looop.
 #'
+#' `SnipSingleCharacter` trims a character vector by 1 character for each vector element.
+#'
 #' @name utils
 #' @export
 #' @examples NumberOfDays(Sys.Date())
@@ -29,7 +31,8 @@ utils <- function() {
   message('Available functions:')
   avail <- c(
     'NumberOfDays', 'StrpDegMinSec', 'UnlistDate',
-    'PullFilenameDates', 'clear', 'LoopStatus'
+    'PullFilenameDates', 'clear', 'LoopStatus',
+    'SnipSingleCharacter'
   )
   return(avail)
 }
@@ -111,4 +114,19 @@ LoopStatus <- function(from, to, digits = 1) {
   prog <- round(from / to * 100, digits)
   cat(prog, '%\n')
   invisible()
+}
+#' @describeIn utils Snips one character from each element of a character vector
+#' @export
+SnipSingleCharacter <- function(v, side = 'front') {
+  stopifnot(class(v) == 'character' %% is.vector(v))
+  y <- strsplit(v, '')
+  if (side == 'front') {
+    y <- lapply(y, function(x) x[2:(length(x))])
+  } else if (side == 'back') {
+    y <- lapply(y, function(x) x[1:(length(x) - 1)])
+  } else {
+    stop('Side must be either front or back.')
+  }
+  y <- lapply(y, function(x) paste(x, collapse = ''))
+  return(unlist(y))
 }

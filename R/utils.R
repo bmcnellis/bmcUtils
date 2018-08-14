@@ -118,7 +118,7 @@ LoopStatus <- function(from, to, digits = 1) {
 #' @describeIn utils Snips one character from each element of a character vector
 #' @export
 SnipSingleCharacter <- function(v, side = 'front') {
-  stopifnot(class(v) == 'character' %% is.vector(v))
+  stopifnot(class(v) == 'character' && is.vector(v))
   y <- strsplit(v, '')
   if (side == 'front') {
     y <- lapply(y, function(x) x[2:(length(x))])

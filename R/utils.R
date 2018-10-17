@@ -119,7 +119,7 @@ LoopStatus <- function(from, to, big_inc = 1000, digits = 1) {
   }
   prog <- from / to * 100
   prog <- round(prog, digits)
-  cat(prog, '%\n')
+  cat(' ', prog, '%\n')
   invisible()
 }
 #' @describeIn utils Snips one character from each element of a character vector

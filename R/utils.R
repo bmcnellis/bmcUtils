@@ -110,8 +110,15 @@ clear <- function() {
 }
 #' @describeIn utils Prints loop progress.
 #' @export
-LoopStatus <- function(from, to, digits = 1) {
-  prog <- round(from / to * 100, digits)
+LoopStatus <- function(from, to, big_inc = 1000, digits = 1) {
+  if (to > big_inc) {
+    if (from %% (big_inc / 10) == 0) cat('[]')
+    if (from %% big_inc != 0) {
+      return(invisible())
+    }
+  }
+  prog <- from / to * 100
+  prog <- round(prog, digits)
   cat(prog, '%\n')
   invisible()
 }

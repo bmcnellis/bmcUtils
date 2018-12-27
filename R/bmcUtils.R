@@ -1,6 +1,12 @@
-#' @title Internal utility functions.
+#' @title Spare utilities package
 #'
 #' @description
+#'
+#' This is a odds-and-ends repository for generalized functions I use in developing
+#' other R packages or analyses. Sometimes other packages are required for functions
+#' to work, but I dont include them in the DESCRIPTION to make installation easier.
+#'
+#' @section Functions:
 #'
 #' `NumberOfDays` counts the days in a month. Input is an object of class
 #' `date`, and it will work for leap years etc.
@@ -17,26 +23,18 @@
 #' working directory. Assumes that the format doesn't include alphabetic
 #' characters.
 #'
-#' `clear` is a shortcut function that (1) clears the environment, (2) runs GC,
-#' (3) clears the console, and (4) restarts R.
-#'
 #' `LoopStatus` prints the progress of a slow looop.
 #'
 #' `SnipSingleCharacter` trims a character vector by 1 character for each vector element.
 #'
-#' @name utils
-#' @export
-#' @examples NumberOfDays(Sys.Date())
-utils <- function() {
-  message('Available functions:')
-  avail <- c(
-    'NumberOfDays', 'StrpDegMinSec', 'UnlistDate',
-    'PullFilenameDates', 'clear', 'LoopStatus',
-    'SnipSingleCharacter'
-  )
-  return(avail)
-}
-#' @describeIn utils Counts days in a month
+#' `Multiplot` plots multiple ggplots in the same window - its mostly copied
+#' verbatim from the R cookbook, link in the function source.
+#'
+#' @author Brandon McNellis
+#' @docType package
+#' @name bmcUtils
+NULL
+#' @describeIn bmcUtils Counts days in a month
 #' @export
 NumberOfDays <- function(date) {
   m <- format(date, format = "%m")
@@ -45,7 +43,7 @@ NumberOfDays <- function(date) {
   }
   return(as.integer(format(date - 1, format = "%d")))
 }
-#' @describeIn utils Strips deg-min-sec vectors to 'numeric' char vector.
+#' @describeIn bmcUtils Strips deg-min-sec vectors to 'numeric' char vector.
 #' @export
 StripDegMinSec <- function(x) {
   x <- regmatches(x, gregexpr("[[:digit:]]+", x))
@@ -65,7 +63,7 @@ StripDegMinSec <- function(x) {
   }
   return(ret)
 }
-#' @describeIn utils Unlists a list of 'Date' objects w/o coercion to numeric.
+#' @describeIn bmcUtils Unlists a list of 'Date' objects w/o coercion to numeric.
 #' @export
 UnlistDate <- function(x) {
   y <- .POSIXct(list())
@@ -73,7 +71,7 @@ UnlistDate <- function(x) {
   x <- lapply(x, function(x) y <<- c(y, x))
   return(y)
 }
-#' @describeIn utils Generates a date vector from filenames.
+#' @describeIn bmcUtils Generates a date vector from filenames.
 #' @export
 PullFilenameDates <- function(fmt) {
   if (nchar(fmt) < 6) stop('Bad fmt input.')
@@ -96,19 +94,7 @@ PullFilenameDates <- function(fmt) {
   }
   return(out)
 }
-#' @describeIn utils Clears multiple aspects of the R environment.
-#' @export
-clear <- function() {
-  suppressWarnings(file.remove('.Rhistory'))
-  suppressWarnings(file.remove('.Rdata'))
-  invisible(gc())
-  cat("\014")
-  save.image()
-  on.exit(rm(list = ls()))
-  on.exit(invisible(.rs.restartR()), add = T)
-  invisible()
-}
-#' @describeIn utils Prints loop progress.
+#' @describeIn bmcUtils Prints loop progress.
 #' @export
 LoopStatus <- function(from, to, big_inc = 1000, digits = 1) {
   if (to > big_inc) {
@@ -122,7 +108,7 @@ LoopStatus <- function(from, to, big_inc = 1000, digits = 1) {
   cat(' ', prog, '%\n')
   invisible()
 }
-#' @describeIn utils Snips one character from each element of a character vector
+#' @describeIn bmcUtils Snips one character from each element of a character vector
 #' @export
 SnipSingleCharacter <- function(v, side = 'front') {
   stopifnot(class(v) == 'character' && is.vector(v))
@@ -136,4 +122,32 @@ SnipSingleCharacter <- function(v, side = 'front') {
   }
   y <- lapply(y, function(x) paste(x, collapse = ''))
   return(unlist(y))
+}
+#' @describeIn bmcUtils Multiple ggplot panel
+#' @export
+Multiplot <- function(..., plotlist = NULL, file, cols = 1, layout = NULL) {
+  # Adapted/Copied from:
+  # http://www.cookbook-r.com/Graphs/Multiple_graphs_on_one_page_(ggplot2)/
+  require(grid)
+  require(ggplot2)
+
+  plots <- c(list(...), plotlist)
+  numPlots = length(plots)
+  if (is.null(layout)) {
+    layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
+                     ncol = cols, nrow = ceiling(numPlots/cols))
+  }
+
+  if (numPlots == 1) {
+    print(plots[[1]])
+  } else {
+    grid.newpage()
+    pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
+    for (i in 1:numPlots) {
+      matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
+
+      print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+                                      layout.pos.col = matchidx$col))
+    }
+  }
 }
